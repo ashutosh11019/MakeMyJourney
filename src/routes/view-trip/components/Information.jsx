@@ -3,7 +3,7 @@ import { PHOTO_REF_URL } from '@/constants/options';
 import { GetPlacesDetails } from '@/services/GlobalAPI';
 import React, { useEffect } from 'react'
 import { FaShareAlt } from "react-icons/fa";
-import { PiCalendarDotsDuotone, PiMoneyWavyDuotone, PiPersonDuotone } from "react-icons/pi";
+import { PiCalendarDotsDuotone, PiMoneyWavyDuotone, PiPersonDuotone, PiPaletteDuotone, PiUsersThreeDuotone } from "react-icons/pi";
 
 
 const Information = ({ tripInfo }) => {
@@ -51,13 +51,25 @@ const Information = ({ tripInfo }) => {
                     {/* Travelers Card */}
                     <div className="p-3 px-6 bg-gray-50 text-gray-600 rounded-2xl border-2 flex items-center gap-3 hover:scale-105 transition duration-200 cursor-pointer">
                         <PiPersonDuotone className="size-5 flex-none text-teal-500" />
-                        <p>{tripInfo?.userInput?.noOfTraveler} Persons</p>
+                        <p>{tripInfo?.userInput?.noOfTraveler} {tripInfo?.userInput?.noOfTraveler == 1 ? 'Person' : 'Persons'}</p>
                     </div>
+
+                    {/* Traveler Type Card */}
+                    {tripInfo?.userInput?.traveler?.title && <div className="p-3 px-6 bg-gray-50 text-gray-600 rounded-2xl border-2 flex items-center gap-3 hover:scale-105 transition duration-200 cursor-pointer">
+                        <PiUsersThreeDuotone className="size-5 flex-none text-blue-500" />
+                        <p>{tripInfo?.userInput?.traveler?.title}</p>
+                    </div>}
 
                     {/* Budget Card */}
                     <div className="p-3 px-6 bg-gray-50 text-gray-600 rounded-2xl border-2 flex items-center gap-3 hover:scale-105 transition duration-200 cursor-pointer">
                         <PiMoneyWavyDuotone className="size-5 flex-none text-green-500" />
                         <p>{tripInfo?.userInput?.budget} Budget</p>
+                    </div>
+
+                    {/* theme Card */}
+                    <div className="p-3 px-6 bg-gray-50 text-gray-600 rounded-2xl border-2 flex items-center gap-3 hover:scale-105 transition duration-200 cursor-pointer">
+                        <PiPaletteDuotone className="size-5 flex-none text-orange-500" />
+                        <p>{tripInfo?.userInput?.theme}</p>
                     </div>
                 </div>
             </div>
