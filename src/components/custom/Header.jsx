@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { LogIn, LogOut } from 'lucide-react'
 import {
@@ -77,13 +77,13 @@ const Header = () => {
 
             {location.pathname !== '/my-trips' ? (
               <Link to="/my-trips">
-                <Button className="text-sm md:text-base py-2 px-6 rounded-lg text-gray-800 bg-yellow-400  hover:bg-yellow-500 hover:shadow-lg transition duration-300">
+                <Button className="text-sm md:text-base py-2 px-6 rounded-lg text-gray-800 bg-[#007aff] hover:shadow-lg transition duration-300">
                   My Trips
                 </Button>
               </Link>
             ) :
               <Link to="/create-trip">
-                <Button className="text-sm md:text-base py-2 px-6 rounded-lg text-gray-800 bg-yellow-400  hover:bg-yellow-500 hover:shadow-lg transition duration-300">
+                <Button className="text-sm md:text-base py-2 px-6 rounded-lg text-gray-800 bg-[#007aff] hover:shadow-lg transition duration-300">
                   + Create Trip
                 </Button>
               </Link>
@@ -104,7 +104,7 @@ const Header = () => {
           </>
           :
           <>
-            <Button onClick={() => setOpenDialog(true)} className="text-sm md:text-base py-2 px-6 rounded-lg text-gray-800 bg-yellow-400  hover:bg-yellow-500 hover:shadow-lg transition duration-300">
+            <Button onClick={() => setOpenDialog(true)} className="text-sm md:text-base py-2 px-6 rounded-lg text-gray-800 bg-[#007aff] hover:shadow-lg transition duration-300">
               <LogIn className="text-xl" /> Sign In
             </Button>
             <LoginDialog openDialog={openDialog} setOpenDialog={setOpenDialog} login={userLogin} />
