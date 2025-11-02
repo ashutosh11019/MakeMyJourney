@@ -21,6 +21,7 @@ const CreateTrip = () => {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
   const [dateRange, setDateRange] = useState({ from: undefined, to: undefined });
+  const [selectedTraveler, setSelectedTraveler] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
