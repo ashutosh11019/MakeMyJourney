@@ -87,5 +87,5 @@ export const SelectThemeOptions = [
 
 export const AI_PROMPT='Generate a travel plan for location: {location},for theme:{theme}, for {noOfDays} days, for {noOfTraveler} people with a {budget} budget. The output must be in JSON format. For each day in the itinerary, suggest 2-3 hotels with name, exact address, price, rating, and description. The itinerary should be an array of objects, where each object represents a day and contains "day", "plan" (an array of places), and "hotels" (an array of hotels for that day). Each item in the "plan" array must include: place name, place details, ticket pricing, rating, time to explore, best time to visit, and an object named "travelCost" with "cab" and "bus" properties for the estimated cost from a central point.'
 
-export const PHOTO_REF_URL='https://places.googleapis.com/v1/{placeName}/media?maxHeightPx=1000&maxWidthPx=1000&key=' + import.meta.env.VITE_GOOGLE_API_KEY
-export const PHOTO_REF_URL_LOW_QUAL='https://places.googleapis.com/v1/{placeName}/media?maxHeightPx=400&maxWidthPx=400&key=' + import.meta.env.VITE_GOOGLE_API_KEY
+export const PHOTO_REF_URL='https://places.googleapis.com/v1/{placeName}/media?maxHeightPx=1000&maxWidthPx=1000&key=' + import.meta.env.VITE_GOOGLE_PLACES_API_KEY
+export const PHOTO_REF_URL_LOW_QUAL='https://places.googleapis.com/v1/{placeName}/media?maxHeightPx=400&maxWidthPx=400&key=' + import.meta.env.VITE_GOOGLE_PLACES_API_KEY
