@@ -20,7 +20,7 @@ const HotelCard = ({ hotel }) => {
             const photos = response.data?.places[0]?.photos;
             setPhotoURL(PHOTO_REF_URL.replace('{placeName}', photos[0]?.name));
         } catch (error) {
-            setPhotoURL('/hotel.jpg');
+            setPhotoURL('/hotel.jpeg');
         }
     }
     return (

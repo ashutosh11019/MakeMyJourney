@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <section
       className="relative flex flex-col items-center justify-center gap-10 px-6 sm:px-16 lg:px-32 py-20 min-h-[600px] bg-cover bg-center text-white overflow-hidden"
-      style={{ backgroundImage: 'url(/hotel.jpg)' }}
+      style={{ backgroundImage: 'url(/hotel.jpeg)' }}
       aria-label="Hero Section: AI-Powered Travel Planner"
     >
       <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay */}
