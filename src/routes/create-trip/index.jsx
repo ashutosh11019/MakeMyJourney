@@ -18,12 +18,17 @@ import LoginDialog from '@/components/custom/LoginDialog';
 const CreateTrip = () => {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
+  const [selectedTraveler, setSelectedTraveler] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // seting the values to the form data
   const handleInput = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value
+    })
     setFormData({
       ...formData,
       [name]: value
@@ -98,8 +103,13 @@ const CreateTrip = () => {
     const docId = uuidv4();
     try {
       // The AI response for JSON is often wrapped in ```json ... ```, which needs to be removed before parsing.
-      const cleanedResponse = response.replace(/^```json/, '').replace(/```$/, '').trim();
-      const tripData = JSON.parse(cleanedResponse);
+      // A more robust way is to find the JSON object within the response.
+      const match = response.match(/```json\s*([\s\S]*?)\s*```/);
+      const jsonString = match ? match[1] : response;
+      if (!jsonString) {
+        throw new Error("No JSON content found in AI response.");
+      }
+      const tripData = JSON.parse(jsonString);
       await setDoc(doc(db, "AITrips", docId), {
         id: docId,
         userEmail: userEmail,
@@ -132,7 +142,7 @@ const CreateTrip = () => {
       <section className="relative h-[500px] flex flex-col justify-center items-center text-white">
         {/* Background Image */}
         <img
-          src="/main.jpg"
+          src="/main.png"
           alt="Australia Background"
           className="absolute inset-0 w-full h-full object-cover -z-10"
         />
@@ -228,6 +238,7 @@ const CreateTrip = () => {
                   <h2 className="text-4xl mb-2">{item.icon}</h2>
                   <h2 className="font-bold text-xl text-gray-800">{item.title}</h2>
                   <h2 className="text-md text-gray-500">{item.desc}</h2>
+                  <p className="text-sm text-gray-500 mt-2 font-semibold">{item.people} {item.people == 1 ? 'Person' : 'People'}</p>
                 </div>
               ))}
             </div>
@@ -239,13 +250,41 @@ const CreateTrip = () => {
             <div className="grid md:grid-cols-4 gap-6">
               {SelectTravellersList.map((item, index) => (
                 <div
-                  key={index}
-                  onClick={() => handleInput('noOfTraveler', item.people)}
-                  className={`p-6 border rounded-lg cursor-pointer transition-transform transform hover:scale-105 hover:shadow-xl ${formData?.noOfTraveler === item.people ? 'shadow-2xl border-blue-500 bg-blue-50' : 'bg-white'}`}
+                  key={item.id} onClick={() => {
+                    setSelectedTraveler(item); 
+                    handleInput('traveler', item);
+                    handleInput('noOfTraveler', item.people); 
+                  }}
+                  className={`p-6 border rounded-lg cursor-pointer transition-transform transform hover:scale-105 hover:shadow-xl ${selectedTraveler?.id === item.id ? 'shadow-2xl border-blue-500 bg-blue-50' : 'bg-white'}`}
                 >
                   <h2 className="text-4xl mb-2">{item.icon}</h2>
                   <h2 className="font-bold text-xl text-gray-800">{item.title}</h2>
                   <h2 className="text-md text-gray-500">{item.desc}</h2>
+                  {(item.id === 1 || item.id === 2) ? (
+                    <p className="text-sm text-gray-500 mt-2 font-semibold">{item.people} {item.people == 1 ? 'Person' : 'People'}</p>
+                  ) : (
+                    <div className="mt-4 flex items-center justify-center gap-4">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const newValue = Math.max(item.min, (Number(formData?.noOfTraveler) || item.min) - 1);
+                          handleInput('noOfTraveler', newValue);
+                        }}
+                      >
+                        -
+                      </Button>
+                      <span className="text-lg font-bold w-12 text-center">{selectedTraveler?.id === item.id ? formData.noOfTraveler : item.people}</span>
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        onClick={(e) => { e.stopPropagation(); handleInput('noOfTraveler', (Number(formData?.noOfTraveler) || item.min - 1) + 1); }}
+                      >
+                        +
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
