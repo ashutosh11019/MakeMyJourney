@@ -120,3 +120,33 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom styles for react-day-picker */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #007aff;
+  --rdp-background-color: #eef1f4;
+  --rdp-accent-color-dark: #007aff;
+  --rdp-background-color-dark: #1c1c1e;
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+  --rdp-border-radius: 10px;
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: var(--rdp-accent-color);
+  color: white;
+}
+
+.rdp-day_range_start,
+.rdp-day_range_end {
+  background-color: var(--rdp-accent-color) !important;
+  color: white !important;
+}
+
+.rdp-day_range_middle {
+  background-color: var(--rdp-background-color);
+  color: black;
+}
