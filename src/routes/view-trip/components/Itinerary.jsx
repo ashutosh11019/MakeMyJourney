@@ -9,9 +9,13 @@ import PlaceCard from './PlaceCard';
 import { Link } from 'react-router-dom';
 
 const Itinerary = ({ tripInfo }) => {
+    const numberOfDays = tripInfo?.userInput?.noOfDays;
     return (
         <div>
-            <h2 className='text-2xl font-bold mt-8 mb-2'>Places to Visit</h2>
+            <div className='flex justify-between items-center'>
+                <h2 className='text-2xl font-bold mt-8 mb-2'>Places to Visit</h2>
+                {numberOfDays && <p className='text-lg font-medium'>{numberOfDays} {numberOfDays > 1 ? 'Days' : 'Day'}</p>}
+            </div>
             {tripInfo?.tripData?.itinerary?.map((itineraryDay, key) => (
                 // console.log(itineraryDay),
                 <div key={key}>

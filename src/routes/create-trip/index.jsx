@@ -1,6 +1,8 @@
 import { Input } from '@/components/ui/input';
 import { AI_PROMPT, SelectBudgetOptions, SelectTravellersList, SelectThemeOptions } from '@/constants/options';
-import { useState } from 'react'
+import { useState } from 'react';
+import { DateRangePicker } from './components/DateRangePicker';
+import { differenceInDays } from 'date-fns';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -18,6 +20,7 @@ import LoginDialog from '@/components/custom/LoginDialog';
 const CreateTrip = () => {
   const [place, setPlace] = useState();
   const [formData, setFormData] = useState([]);
+  const [dateRange, setDateRange] = useState({ from: undefined, to: undefined });
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -29,6 +32,17 @@ const CreateTrip = () => {
       [name]: value
     })
   }
+
+  const handleDateRangeChange = (range) => {
+    setDateRange(range);
+    if (range?.from && range?.to) {
+      const numberOfDays = differenceInDays(range.to, range.from) + 1;
+      handleInput('noOfDays', numberOfDays);
+    } else {
+      // Reset if the range is cleared
+      handleInput('noOfDays', undefined);
+    }
+  };
 
   // Google Login
   const login = useGoogleLogin({
@@ -205,13 +219,8 @@ const CreateTrip = () => {
 
           {/* Trip Duration */}
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">How Many Days Will Your Adventure Last? 📅</h2>
-            <Input 
-              placeholder="E.g., 3" 
-              type="number" 
-              onChange={(e) => handleInput('noOfDays', e.target.value)} 
-              className="w-full p-4 text-lg border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">When Are You Planning to Go? 📅</h2>
+            <DateRangePicker onRangeChange={handleDateRangeChange} />
           </div>
 
           {/* Budget */}
