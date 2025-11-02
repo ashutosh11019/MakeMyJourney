@@ -34,9 +34,8 @@ A web application that helps users plan their trips using generative AI. Users c
 
 ### Installation
 
-1.  Clone the repository: `git clone <repository-url>`
-2.  Navigate to the project directory: `cd ai-travel-planner-web-main`
-3.  Install dependencies: `npm install`
+1.  Clone the repository: `git clone https://github.com/ashutosh11019/MakeMyJourney.git`
+2.  Install dependencies: `npm install`
 
 ### Configuration
 
