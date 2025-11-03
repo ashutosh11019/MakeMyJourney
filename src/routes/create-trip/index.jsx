@@ -7,7 +7,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { chatSession } from '@/services/AIModel';
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FiCompass } from "react-icons/fi";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { doc, setDoc } from 'firebase/firestore';
@@ -15,6 +15,7 @@ import { db } from '@/services/firebaseConfig';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import LoginDialog from '@/components/custom/LoginDialog';
+import TripGenerationLoader from '@/components/custom/TripGenerationLoader';
 
 // CreateTrip Component
 const CreateTrip = () => {
@@ -153,10 +154,11 @@ const CreateTrip = () => {
 
   return (
     <div>
+      {loading && <TripGenerationLoader />}
+
       <section className="relative h-[500px] flex flex-col justify-center items-center text-white">
         {/* Background Image */}
         <img
-          src="/main.png"
           alt="Australia Background"
           className="absolute inset-0 w-full h-full object-cover -z-10"
         />
@@ -302,11 +304,11 @@ const CreateTrip = () => {
 
         {/* Generate Trip Button */}
         <div className="flex justify-center my-10">
-          <Button disabled={loading} onClick={OnGenerateTrip} className="w-full py-3 text-lg bg-[#007aff] text-black rounded-lg hover:bg-[#007aff] transition duration-300">
+          <Button disabled={loading} onClick={OnGenerateTrip} className="w-full py-3 text-lg bg-[#007aff] text-black rounded-lg hover:bg-[#007aff] transition duration-300 flex items-center justify-center gap-2">
             {loading ? (
               <>
-                <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
-                <span>Creating Trip</span>
+                <FiCompass className="h-7 w-7 animate-spin" />
+                <span>Crafting Your Adventure...</span>
               </>
             ) : (
               'Create My Itinerary'
