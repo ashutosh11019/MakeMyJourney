@@ -161,6 +161,7 @@ const CreateTrip = () => {
         <img
           alt="Australia Background"
           className="absolute inset-0 w-full h-full object-cover -z-10"
+          src="/main.jpg"
         />
 
         {/* Overlay */}
