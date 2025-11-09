@@ -4,21 +4,21 @@ export const SelectTravellersList = [
         title: 'Solo',
         desc: 'Discover the world on your own terms, one adventure at a time.',
         icon: '🎒',
-        people:'1'
+        people: 1
     },
     {
         id:2,
         title: 'Couple',
         desc: 'Perfect for couples seeking memorable moments together.',
         icon: '🥂',
-        people:'2'
+        people: 2
     },
     {
         id:3,
         title: 'Family',
         desc: 'Create lasting memories with your loved ones on a shared journey.',
         icon: '🏡',
-        people:'2',
+        people: 2,
         min: 2
     },
     {
@@ -26,7 +26,7 @@ export const SelectTravellersList = [
         title: 'Group',
         desc: 'Gather your crew and embark on a thrilling adventure together.',
         icon: '⛵',
-        people:'2',
+        people: 2,
         min: 2
     }
 ]
